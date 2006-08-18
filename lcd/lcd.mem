@@ -29,28 +29,48 @@
 
 
 80:
+# Start reading from the sensor.
+6e 02 00 # mov #%00000010,0 ; cs high.
+6e 1a 04 # mov #%00011010,4 ; strobe, clk, cs are out.
+3f 00    # clr 0 ; take cs low.
 
-# increment.
-ae 05    # ldx #$05
+# Dump one bit.
+4f       # clra
+bd d2    # jsr read_data
+# Get a byte.
+bd d0    # jsr read_byte
 
-#inc_loop
-e6 ea    # lda x,$ea
-a1 09    # cmp #9
-26 06    # bne .+6
-6f ea    # clr x,$ea
-5b f6    # dbnz inc_loop
-20 02    # bra .+2
-6c ea    # inc x,$ea
+# Convert to decimal
+ae ff    # ldx #-1
+
+5c       # incx
+a0 64    # sub 100
+24 fb    # bcc .-5
+bf eb    # stx $eb
+
+ae 0a    # ldx #10
+
+5a       # decx
+ab 0a    # add 10
+24 fb    # bcc .-5
+bf ec    # stx $eb
+
+b7 ed    # sta $ed
+
+# Get the next 5 bits.
+a6 f0    # lda #$f0
+bd d2    # jsr read_data
+
+b7 ee    # sta $ee
+48       # lsla
+48       # lsla
+bb ee    # add $ee
+62       # nsa
+a4 0f    # and #$0f
+b7 ee    # sta $ee
 
 # display.
-ae 04    # ldx #4
-#display_loop
-89       # pshx
-ee ea    # ldx x,$ea
-d6 ee e0 # lda x,$eee0
-cd ef 00 # jsr display_byte
-88       # pulx
-5b f4    # dbnzx display_loop
+cd ef 1a # jsr display
 
 # pulse strobe & update parity.
 6e 12 00 # mov #$12,0
@@ -62,20 +82,19 @@ cd ef 00 # jsr display_byte
 5b fe    # dbnzx .-2
 4b fc    # dbnzx .-4
 
-20 d2    # bra $80
+bc 80    # jmp $80
 
-b0:
+d0:
 
 # read_byte:
 a6 fe    # lda #%11111110
 # read_data:
+6e 10 00 # mov #%00010000,0
 6e 18 00 # mov #%00011000,0
 
-48       # lsla
-0b 00 01 # brclr5 0,.+1
-4c       # inca
-6e 10 00 # mov #%00010000,0
-25 f3    # bcs .-13
+0b 00 00 # brclr5 0,.+0
+49       # rola
+25 f4    # bcs .-12
 81       # rts
 
 
