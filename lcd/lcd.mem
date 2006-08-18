@@ -31,7 +31,7 @@
 80:
 
 # increment.
-ae 05    # ldx #$04
+ae 05    # ldx #$05
 
 #inc_loop
 e6 ea    # lda x,$ea
@@ -47,55 +47,40 @@ ae 04    # ldx #4
 #display_loop
 89       # pshx
 ee ea    # ldx x,$ea
-e6 e0    # lda x,$e0
-bd c0    # jsr transmit_byte
+d6 ee e0 # lda x,$eee0
+cd ef 00 # jsr display_byte
 88       # pulx
-5b f6    # dbnz display_loop
+5b f4    # dbnzx display_loop
 
 # pulse strobe & update parity.
 6e 12 00 # mov #$12,0
 33 ea    # com ea
 6e 02 00 # mov #$02,0
 
-4f
-5f
-5b fe
-4b fc
+4f       # clra
+5f       # clrx
+5b fe    # dbnzx .-2
+4b fc    # dbnzx .-4
 
-20 d4    # bra $80
+20 d2    # bra $80
 
-c0:
+b0:
 
-# transmit_byte:
-89       # pshx
-
-#87
-#cd 28 0f
-#86
-
-ae 08    # ldx #8
-b8 ea    # xor $ea
+# read_byte:
+a6 fe    # lda #%11111110
+# read_data:
+6e 18 00 # mov #%00011000,0
 
 48       # lsla
-25 08    # bcs .+8
-
-6e 02 00 # mov #2,0
-6e 0a 00 # mov #$a,0
-
-20 06    # bcs .+6
-
-6e 22 00 # mov #22,0
-6e 2a 00 # mov #$2a,0
-
-5b ed    # dbnz .-19
-
-88       # pulx
+0b 00 01 # brclr5 0,.+1
+4c       # inca
+6e 10 00 # mov #%00010000,0
+25 f3    # bcs .-13
 81       # rts
 
-# Segment defs.
-e0: 7e 48 3d 6d 4b 67 77 4c 7f 6f
-ea= 0
-eb= 0 0 0 0 0 0
+
+ea: 0
+eb= 0 0 0 0 0
 
 # ea - parity (00 or ff).
 # eb,ec,ed,ee,ef - counter bytes.

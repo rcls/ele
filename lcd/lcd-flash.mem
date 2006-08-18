@@ -1,0 +1,26 @@
+# Segment defs.
+eee0: 7e 48 3d 6d 4b 67 77 4c 7f 6f
+
+# display_byte:
+ef00:
+
+89       # pshx
+
+ae 08    # ldx #8
+b8 ea    # xor $ea
+
+48       # lsla
+25 08    # bcs .+8
+
+6e 02 00 # mov #2,0
+6e 0a 00 # mov #$a,0
+
+20 06    # bcs .+6
+
+6e 22 00 # mov #22,0
+6e 2a 00 # mov #$2a,0
+
+5b ed    # dbnz .-19
+
+88       # pulx
+81       # rts
