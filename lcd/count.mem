@@ -1,0 +1,104 @@
+
+0: 3a
+4: 3a
+
+# Now pulse clock, (pta 3)
+0:32  0:3a  0:32  0:3a  0:32  0:3a  0:32  0:3a
+0:32  0:3a  0:32  0:3a  0:32  0:3a  0:32  0:3a
+0:32  0:3a  0:32  0:3a  0:32  0:3a  0:32  0:3a
+0:32  0:3a  0:32  0:3a  0:32  0:3a  0:32  0:3a
+0:32  0:3a  0:32  0:3a  0:32  0:3a  0:32  0:3a
+0:32  0:3a  0:32  0:3a  0:32  0:3a  0:32  0:3a
+0:32  0:3a  0:32  0:3a  0:32  0:3a  0:32  0:3a
+0:32  0:3a  0:32  0:3a  0:32  0:3a  0:32  0:3a
+
+# Take data (pta 5) low.
+
+0: 1a
+
+# Pulse clock again.
+
+0:12  0:1a  0:12  0:1a  0:12  0:1a  0:12  0:1a
+0:12  0:1a  0:12  0:1a  0:12  0:1a  0:12  0:1a
+0:12  0:1a  0:12  0:1a  0:12  0:1a  0:12  0:1a
+0:12  0:1a  0:12  0:1a  0:12  0:1a  0:12  0:1a
+0:12  0:1a  0:12  0:1a  0:12  0:1a  0:12  0:1a
+0:12  0:1a  0:12  0:1a  0:12  0:1a  0:12  0:1a
+0:12  0:1a  0:12  0:1a  0:12  0:1a  0:12  0:1a
+0:12  0:1a  0:12  0:1a  0:12  0:1a  0:12  0:1a
+
+
+80:
+
+# increment.
+ae 05    # ldx #$04
+
+#inc_loop
+e6 ea    # lda x,$ea
+a1 09    # cmp #9
+26 06    # bne .+6
+6f ea    # clr x,$ea
+5b f6    # dbnz inc_loop
+20 02    # bra .+2
+6c ea    # inc x,$ea
+
+# display.
+ae 04    # ldx #4
+#display_loop
+89       # pshx
+ee ea    # ldx x,$ea
+e6 e0    # lda x,$e0
+bd c0    # jsr transmit_byte
+88       # pulx
+5b f6    # dbnz display_loop
+
+# pulse strobe & update parity.
+6e 12 00 # mov #$12,0
+33 ea    # com ea
+6e 02 00 # mov #$02,0
+
+4f
+5f
+5b fe
+4b fc
+
+20 d4    # bra $80
+
+c0:
+
+# transmit_byte:
+89       # pshx
+
+#87
+#cd 28 0f
+#86
+
+ae 08    # ldx #8
+b8 ea    # xor $ea
+
+48       # lsla
+25 08    # bcs .+8
+
+6e 02 00 # mov #2,0
+6e 0a 00 # mov #$a,0
+
+20 06    # bcs .+6
+
+6e 22 00 # mov #22,0
+6e 2a 00 # mov #$2a,0
+
+5b ed    # dbnz .-19
+
+88       # pulx
+81       # rts
+
+# Segment defs.
+e0: 7e 48 3d 6d 4b 67 77 4c 7f 6f
+ea= 0
+eb= 0 0 0 0 0 0
+
+# ea - parity (00 or ff).
+# eb,ec,ed,ee,ef - counter bytes.
+
+fa: 0 0 0 0 0 80
+100=
