@@ -1,7 +1,7 @@
 
 ee00:
 6e 01 1f # mov     #$01,$1f ; disable cop.
-6e 00 ea # mov #0,$ea ;Clear parity
+3f ea # mov #0,$ea ;Clear parity
 
 # Start reading from the sensor.
 6e 02 00 # mov #%00000010,0 ; cs high.
@@ -10,17 +10,22 @@ ee00:
 
 # Dump one bit.
 4f       # clra
-ad 40    # jsr read_data
+ad 46    # jsr read_data
 # Get a byte.
 a6 fe    # lda #%11111110
-ad 3c    # jsr read_data
+ad 42    # jsr read_data
 
 # Convert to decimal
-ae ff    # ldx #-1
+5f       # clrx
 
 5c       # incx
 a0 64    # sub 100
 24 fb    # bcc .-5
+
+5a       # decx
+26 02    # bne .+2
+ae 0a    # ldx #10
+
 bf eb    # stx $eb
 
 ae 0a    # ldx #10
@@ -30,6 +35,7 @@ ab 0a    # add 10
 24 fb    # bcc .-5
 bf ec    # stx $eb
 
+ab 10    # add #$16 ; dp
 b7 ed    # sta $ed
 
 # Get the next 5 bits.
@@ -59,9 +65,9 @@ cd ef 1a # jsr display
 4b fc    # dbnzx .-4
 3b ef f9 # dbnz $ef,.-7
 
-20 b5    # bra $83
+20 af    # bra $85
 
-ee51=
+ee56=
 
 # read_data:
 6e 10 00 # mov #%00010000,0
@@ -72,8 +78,7 @@ ee51=
 25 f4    # bcs .-12
 81       # rts
 
-# Segment defs.
-eee0: 7e 48 3d 6d 4b 67 77 4c 7f 6f
+ee63=
 
 # display_byte:
 ef00:
@@ -108,8 +113,14 @@ ae 04    # ldx #4
 #display_loop
 89       # pshx
 ee ea    # ldx x,$ea
-d6 ee e0 # lda x,$eee0
+d6 fd 00 # lda x,$fd00
 cd ef 00 # jsr display_byte
 88       # pulx
 5b f4    # dbnzx display_loop
 81       # rts
+
+
+# Segment defs. 0 1 2 3 4 5 6 7 8 9 blank
+fd00: 7e 48 3d 6d 4b 67 77 4c 7f 6f 00
+# With dp:
+fd10: fe c8 bd ed cb e7 f7 cc ff ef 80
