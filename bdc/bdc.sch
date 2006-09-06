@@ -79,7 +79,7 @@ device=74HC1G04
 T 48100 64500 5 10 1 1 0 0 1
 refdes=Uo1
 T 48400 64000 5 10 0 1 0 0 1
-footprint=SOT23-5
+footprint=sot23_5
 }
 C 47700 62300 1 90 0 capacitor-1.sym
 {
@@ -138,7 +138,7 @@ refdes=Yo1
 T 48200 63800 5 10 0 0 0 0 1
 symversion=0.1
 T 48400 63100 5 10 0 1 0 0 1
-footprint=HC49-rcl
+footprint=HC49_rcl
 }
 N 48800 65000 49300 65000 4
 N 49300 65000 49300 64100 4
