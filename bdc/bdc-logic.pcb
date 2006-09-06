@@ -1,5 +1,5 @@
 # release: pcb-bin 20060822
-# date:    Wed Sep  6 21:31:42 2006
+# date:    Wed Sep  6 21:58:41 2006
 # user:    ralph (Ralph Loader)
 # host:    localhost.localdomain
 
@@ -1165,7 +1165,7 @@ Element["" "sot23_5" "Uo1" "unknown" 315000 185000 -7500 -2500 0 100 ""]
 
 	)
 
-Element["" "0805" "Co1" "1uF" 300000 185000 -12500 -5000 0 100 ""]
+Element["" "0805" "Co1" "1uF" 300000 185000 -2500 5000 1 100 ""]
 (
 	Pad[-393 -3543 393 -3543 5118 2000 5718 "1" "1" "square"]
 	Pad[-393 3543 393 3543 5118 2000 5718 "2" "2" "square"]
