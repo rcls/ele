@@ -276,7 +276,7 @@ device=HEADER3
 T 51500 67200 5 10 1 1 0 0 1
 refdes=J1
 T 51700 66600 5 10 0 1 0 0 1
-footprint=0.1_inch_3pin
+footprint=2mm_3pin
 }
 N 49800 67400 51100 67400 4
 N 51100 65600 49800 65600 4
@@ -498,7 +498,7 @@ device=HEADER3
 T 52400 71100 5 10 1 1 0 0 1
 refdes=J2
 T 52000 69800 5 10 0 0 0 0 1
-footprint=0.1_inch_2pin
+footprint=2mm_2pin
 }
 C 51100 70300 1 0 0 resistor-1.sym
 {
