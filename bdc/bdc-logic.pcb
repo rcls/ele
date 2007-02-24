@@ -1,5 +1,5 @@
 # release: pcb-bin 20060822
-# date:    Sat Nov  4 07:43:43 2006
+# date:    Sun Feb 25 10:16:17 2007
 # user:    ralph (Ralph Loader)
 # host:    i.geek.nz
 
@@ -1604,7 +1604,7 @@ Layer(1 "link")
 	Line[122500 107500 122500 150000 1500 2000 ""]
 	Line[130000 100000 122500 107500 1500 2000 ""]
 	Line[85000 110000 102500 92500 1500 2000 ""]
-	Line[180000 155000 155000 155000 1500 2000 ""]
+	Line[192500 87500 165000 87500 1500 2000 ""]
 	Line[102500 92500 132500 92500 1500 2000 ""]
 	Line[27500 152500 25000 150000 1500 2000 ""]
 	Line[72500 175000 87500 175000 1500 2000 ""]
@@ -1622,7 +1622,9 @@ Layer(1 "link")
 	Line[222500 170000 227500 165000 1500 2000 ""]
 	Line[227500 165000 227500 122500 1500 2000 ""]
 	Line[227500 122500 192500 87500 1500 2000 ""]
-	Line[192500 87500 165000 87500 1500 2000 ""]
+	Line[155000 155000 172500 155000 1500 2000 ""]
+	Line[172500 155000 182500 145000 1500 2000 ""]
+	Line[182500 145000 182500 145000 1500 2000 ""]
 )
 Layer(2 "GND-link")
 (
@@ -2477,9 +2479,10 @@ Layer(7 "link2")
 	Line[185000 72500 160000 47500 1500 2000 ""]
 	Line[97500 72500 97500 127500 1500 2000 ""]
 	Line[97500 127500 92500 132500 1500 2000 ""]
-	Line[225000 102500 182500 145000 1500 2000 ""]
-	Line[132500 37500 97500 72500 1500 2000 ""]
 	Line[135000 37500 132500 37500 1500 2000 ""]
+	Line[132500 37500 97500 72500 1500 2000 ""]
+	Line[225000 102500 225000 110000 1500 2000 ""]
+	Line[225000 110000 180000 155000 1500 2000 ""]
 )
 Layer(8 "link3")
 (
@@ -2561,7 +2564,7 @@ NetList()
 	)
 	Net("BdcDirIn" "(unknown)")
 	(
-		Connect("U6-9")
+		Connect("U6-11")
 		Connect("U7-2")
 		Connect("U8-1")
 	)
@@ -2573,7 +2576,7 @@ NetList()
 	Net("Bit" "(unknown)")
 	(
 		Connect("U5-9")
-		Connect("U6-11")
+		Connect("U6-9")
 	)
 	Net("Clk" "(unknown)")
 	(
@@ -2754,45 +2757,70 @@ NetList()
 	)
 	Net("unnamed_net1" "(unknown)")
 	(
+		Connect("PTA0-1")
+		Connect("U10-8")
+	)
+	Net("unnamed_net2" "(unknown)")
+	(
+		Connect("J4-1")
+		Connect("U10-1")
+	)
+	Net("unnamed_net3" "(unknown)")
+	(
+		Connect("J3-2")
+		Connect("U10-2")
+	)
+	Net("unnamed_net4" "(unknown)")
+	(
+		Connect("D6-1")
+		Connect("U10-5")
+	)
+	Net("unnamed_net5" "(unknown)")
+	(
+		Connect("D6-2")
+		Connect("R8-1")
+	)
+	Net("unnamed_net6" "(unknown)")
+	(
 		Connect("D1-1")
 		Connect("RTS-1")
 		Connect("US1-13")
 	)
-	Net("unnamed_net2" "(unknown)")
+	Net("unnamed_net7" "(unknown)")
 	(
 		Connect("SERIN-1")
 		Connect("US1-8")
 	)
-	Net("unnamed_net3" "(unknown)")
+	Net("unnamed_net8" "(unknown)")
 	(
 		Connect("SEROUT-1")
 		Connect("US1-14")
 	)
-	Net("unnamed_net4" "(unknown)")
+	Net("unnamed_net9" "(unknown)")
 	(
 		Connect("Co2-2")
 		Connect("Ro1-1")
 		Connect("Uo1-2")
 		Connect("Yo1-1")
 	)
-	Net("unnamed_net5" "(unknown)")
+	Net("unnamed_net10" "(unknown)")
 	(
 		Connect("Co3-2")
 		Connect("Ro2-2")
 		Connect("Yo1-2")
 	)
-	Net("unnamed_net6" "(unknown)")
+	Net("unnamed_net11" "(unknown)")
 	(
 		Connect("CI12-1")
 		Connect("D4-2")
 		Connect("D5-1")
 	)
-	Net("unnamed_net7" "(unknown)")
+	Net("unnamed_net12" "(unknown)")
 	(
 		Connect("CI12-2")
 		Connect("DTR-1")
 	)
-	Net("unnamed_net8" "(unknown)")
+	Net("unnamed_net13" "(unknown)")
 	(
 		Connect("CVIN-1")
 		Connect("D1-2")
@@ -2800,100 +2828,75 @@ NetList()
 		Connect("Uv5-2")
 		Connect("Uv33-2")
 	)
-	Net("unnamed_net9" "(unknown)")
+	Net("unnamed_net14" "(unknown)")
 	(
 		Connect("D2-1")
 		Connect("extPOS-1")
 	)
-	Net("unnamed_net10" "(unknown)")
+	Net("unnamed_net15" "(unknown)")
 	(
 		Connect("CO12-2")
 		Connect("R9-1")
 		Connect("Uv12-5")
 	)
-	Net("unnamed_net11" "(unknown)")
+	Net("unnamed_net16" "(unknown)")
 	(
 		Connect("Co33-2")
 		Connect("J1-1")
 		Connect("Uv33-1")
 	)
-	Net("unnamed_net12" "(unknown)")
+	Net("unnamed_net17" "(unknown)")
 	(
 		Connect("Co5-1")
 		Connect("D7-2")
 		Connect("J1-3")
 		Connect("Uv5-1")
 	)
-	Net("unnamed_net13" "(unknown)")
+	Net("unnamed_net18" "(unknown)")
 	(
 		Connect("D5-2")
 		Connect("Uv12-4")
 	)
-	Net("unnamed_net14" "(unknown)")
+	Net("unnamed_net19" "(unknown)")
 	(
 		Connect("J2-2")
 		Connect("Rpd1-2")
 		Connect("Uv12-3")
 	)
-	Net("unnamed_net15" "(unknown)")
+	Net("unnamed_net20" "(unknown)")
 	(
 		Connect("D7-1")
 		Connect("R7-2")
 	)
-	Net("unnamed_net16" "(unknown)")
+	Net("unnamed_net21" "(unknown)")
 	(
 		Connect("CS3-1")
 		Connect("US1-2")
 	)
-	Net("unnamed_net17" "(unknown)")
+	Net("unnamed_net22" "(unknown)")
 	(
 		Connect("CS1-1")
 		Connect("US1-3")
 	)
-	Net("unnamed_net18" "(unknown)")
+	Net("unnamed_net23" "(unknown)")
 	(
 		Connect("CS2-2")
 		Connect("US1-4")
 	)
-	Net("unnamed_net19" "(unknown)")
+	Net("unnamed_net24" "(unknown)")
 	(
 		Connect("CS2-1")
 		Connect("US1-5")
 	)
-	Net("unnamed_net20" "(unknown)")
+	Net("unnamed_net25" "(unknown)")
 	(
 		Connect("CS4-1")
 		Connect("US1-6")
 	)
-	Net("unnamed_net21" "(unknown)")
+	Net("unnamed_net26" "(unknown)")
 	(
 		Connect("CS1-2")
 		Connect("US1-1")
-	)
-	Net("unnamed_net22" "(unknown)")
-	(
-		Connect("PTA0-1")
-		Connect("U10-8")
-	)
-	Net("unnamed_net23" "(unknown)")
-	(
-		Connect("J4-1")
-		Connect("U10-1")
-	)
-	Net("unnamed_net24" "(unknown)")
-	(
-		Connect("J3-2")
-		Connect("U10-2")
-	)
-	Net("unnamed_net25" "(unknown)")
-	(
-		Connect("D6-1")
-		Connect("U10-5")
-	)
-	Net("unnamed_net26" "(unknown)")
-	(
-		Connect("D6-2")
-		Connect("R8-1")
 	)
 	Net("V12" "(unknown)")
 	(
